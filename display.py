@@ -14,9 +14,18 @@ def createTable():
     table.add_column("RAM %")
     table.add_column("Network I/O")
 
-    for i in docker_client.containers:
-        table.add_row(i.name)
-    
+    containerStats = docker_client.getContainerStats()
+
+    for i in containerStats:
+        net = i["networkI/O"]
+        network_str = f"↑{net[0]:.2f} KB  ↓{net[1]:.2f} KB"
+
+        table.add_row(
+            i["name"],
+            str(i["cpu_percent"]) + "%",
+            str(i["memory_percent"]) + "%",
+            network_str
+        )    
     return table
 
 with Live(createTable(), refresh_per_second=2) as live:
