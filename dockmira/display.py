@@ -1,4 +1,5 @@
 import time
+import os
 
 from rich.live import Live
 from rich.table import Table
@@ -28,8 +29,10 @@ def createTable():
         )    
     return table
 
-def run():
+def main():
     try:
+        os.system('cls' if os.name == 'nt' else 'clear')
+
         with Live(createTable(), refresh_per_second=2) as live:
             while True:
                 time.sleep(0.5)
@@ -38,4 +41,4 @@ def run():
         print("\nClosing...")
 
 if __name__ == "__main__":
-    run()
+    main()
