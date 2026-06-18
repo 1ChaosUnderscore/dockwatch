@@ -14,5 +14,5 @@ A real-time Docker container health monitoring from your terminal
 
 ```
 pip install -r requirements.txt
-python display.py
+python cli.py
 ```
