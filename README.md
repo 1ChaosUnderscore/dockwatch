@@ -10,3 +10,9 @@
 
 A real-time Docker container health monitoring from your terminal
 
+## Running It
+
+```
+pip install -r requirements.txt
+python display.py
+```

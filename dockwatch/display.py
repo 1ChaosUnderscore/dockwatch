@@ -28,7 +28,14 @@ def createTable():
         )    
     return table
 
-with Live(createTable(), refresh_per_second=2) as live:
-    while True:
-        time.sleep(0.5)
-        live.update(createTable())
+def run():
+    try:
+        with Live(createTable(), refresh_per_second=2) as live:
+            while True:
+                time.sleep(0.5)
+                live.update(createTable())
+    except KeyboardInterrupt:
+        print("\nClosing...")
+
+if __name__ == "__main__":
+    run()

@@ -1,6 +1,5 @@
 import docker
 import math
-import json
 
 try:  
     client = docker.from_env()
@@ -22,9 +21,8 @@ def calculateCPUpercent(data):
     cpuDelta = total_cpu - preTotal_cpu
     systemDelta = currentSystem - previousSystem
 
-    cpuPercent = (cpuDelta / systemDelta) * online_cpus * 100
-
     if systemDelta > 0 and cpuDelta > 0:
+        cpuPercent = (cpuDelta / systemDelta) * online_cpus * 100
         return math.ceil(cpuPercent * 1000) / 1000
     return 0
 
@@ -70,6 +68,9 @@ def getContainerStats():
     containers = client.containers.list()
     containerStats = []
 
+    if not containers:
+        return containerStats
+
     #loops through each container
     for i in containers:
         stats = i.stats(stream=True, decode=True)
@@ -83,7 +84,5 @@ def getContainerStats():
             "memory_percent": calculateMemoryPercent(data),
             "networkI/O": calculateNetwork(data)
         })
-
-    #print(json.dumps(data, indent=2))
 
     return containerStats
