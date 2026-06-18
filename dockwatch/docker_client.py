@@ -1,5 +1,7 @@
 import docker
 import math
+import os
+import time
 
 try:  
     client = docker.from_env()
@@ -73,16 +75,23 @@ def getContainerStats():
 
     #loops through each container
     for i in containers:
-        stats = i.stats(stream=True, decode=True)
+        try:
+            stats = i.stats(stream=True, decode=True)
 
-        next(stats)
-        data = next(stats)
+            next(stats)
+            data = next(stats)
 
-        containerStats.append({
-            "name": i.name,
-            "cpu_percent": calculateCPUpercent(data),
-            "memory_percent": calculateMemoryPercent(data),
-            "networkI/O": calculateNetwork(data)
-        })
+            containerStats.append({
+                "name": i.name,
+                "cpu_percent": calculateCPUpercent(data),
+                "memory_percent": calculateMemoryPercent(data),
+                "networkI/O": calculateNetwork(data)
+            })
+        except docker.errors.NotFound:
+            continue
+        except StopIteration:
+            continue
+        except Exception as e:
+            continue
 
     return containerStats
