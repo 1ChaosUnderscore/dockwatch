@@ -1,7 +1,5 @@
 import docker
 import math
-import os
-import time
 
 try:  
     client = docker.from_env()

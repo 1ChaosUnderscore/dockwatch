@@ -16,4 +16,4 @@ dependencies = [
 ]
 
 [project.scripts]
-dockmira = "cli:cli"
+dockmira = "dockmira.cli:cli"
