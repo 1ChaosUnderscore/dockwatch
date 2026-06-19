@@ -1,5 +1,5 @@
 import click
-import display
+from dockmira import display
 
 @click.group()
 def cli():
