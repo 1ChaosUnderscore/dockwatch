@@ -4,7 +4,7 @@ import os
 from rich.live import Live
 from rich.table import Table
 
-import docker_client
+from . import docker_client
 
 def createTable():
     table = Table()
