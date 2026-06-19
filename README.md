@@ -16,7 +16,7 @@ A real-time Docker container health monitoring from your terminal
 
 ## Installation
 
-pip install git+https://github.com/1ChaosUnderscore/dockwatch.git
+pip install git+https://github.com/1ChaosUnderscore/dockmira.git
 
 ## Features
 - Live CPU% per container
